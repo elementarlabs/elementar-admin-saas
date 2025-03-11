@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  height: 100%;
+  position: relative;
+
+  emr-sidebar-body {
+    --emr-sidebar-body-padding: 0 calc(var(--spacing) * 3);
+  }
+
+  emr-sidebar-footer {
+    --emr-sidebar-footer-padding: 0 calc(var(--spacing) * 3) calc(var(--spacing) * 4) calc(var(--spacing) * 3);
+  }
+
+  ::ng-deep {
+    emr-navigation {
+      // --emr-navigation-item-width: calc(100% - var(--spacing) * 5);
+      --emr-navigation-item-border-radius: 14px;
+      --emr-navigation-item-height: 44px;
+      // --emr-navigation-item-padding: 0 20px;
+    }
+
+    emr-navigation-divider {
+      --emr-navigation-divider-margin: calc(var(--spacing) * 6) calc(var(--spacing) * 5);
+    }
+  }
+}

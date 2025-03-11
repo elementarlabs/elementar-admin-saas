@@ -1,0 +1,80 @@
+<div class="h-full flex items-center gap-7 px-5">
+  <div class="flex items-center gap-3">
+    @if (!_layoutApi.isSidebarShown('root')) {
+      <div class="w-max -ms-3">
+        <button mat-icon-button (click)="toggleSidebar()">
+          <emr-icon name="ph:list"/>
+        </button>
+      </div>
+    }
+
+    <emr-breadcrumbs>
+      <emr-breadcrumb-item>
+        <emr-icon name="ph:house-fill" emrBreadcrumbItemIcon/>
+      </emr-breadcrumb-item>
+      <emr-breadcrumb-separator>/</emr-breadcrumb-separator>
+      <emr-breadcrumb-item>
+        Account
+      </emr-breadcrumb-item>
+      <emr-breadcrumb-separator>/</emr-breadcrumb-separator>
+      <emr-breadcrumb-item>
+        Settings
+      </emr-breadcrumb-item>
+      <emr-breadcrumb-separator>/</emr-breadcrumb-separator>
+      <emr-breadcrumb-item>
+        Notifications
+      </emr-breadcrumb-item>
+    </emr-breadcrumbs>
+  </div>
+  <div class="ms-auto flex items-center gap-3">
+    <a mat-button href="https://github.com/elementarlabs/elementar-admin" target="_blank">Github</a>
+    <button mat-icon-button matTooltip="Notifications"
+            [emrPopoverTriggerFor]="notificationsPopover" position="below-end">
+      <span matBadge="3">
+        <emr-icon name="ph:bell"/>
+      </span>
+    </button>
+    <button mat-icon-button (click)="_themeManager.toggleColorScheme()" matTooltip="Color Theme"
+            emrSoundEffect soundSrc="/assets/sound-effects/mouse-click.ogg">
+      @if (_themeManager.getColorScheme() === 'light') {
+        <emr-icon name="ph:sun"/>
+      } @else if (_themeManager.getColorScheme() === 'dark') {
+        <emr-icon name="ph:moon"/>
+      }
+    </button>
+    <emr-dicebear [key]="currentUser.email"
+                  [src]="currentUser.photoURL || ''" [clickable]="true" [matMenuTriggerFor]="accountMenu"
+                  matTooltip="Account" class="size-8"/>
+  </div>
+</div>
+
+<ng-template #notificationsPopover>
+  @defer {
+    <emr-notifications-popover/>
+  }
+</ng-template>
+
+<mat-menu xPosition="before" #accountMenu="matMenu">
+  <div class="flex items-center px-4 pb-2 pt-2 gap-3">
+    <emr-dicebear key="PS" class="size-14"/>
+    <div class="-mt-0.5">
+      <div class="flex items-center gap-2">
+        @if (currentUser.displayName) {
+          {{ currentUser.displayName }}
+        }
+        <div class="border flex items-center border-neutral-900 dark:border-neutral-200 h-5 leading-3 px-2
+                    rounded-full font-bold text-4xs uppercase text-neutral-500 dark:text-neutral-200">Free</div>
+      </div>
+      <div class="text-xs text-gray-500 mt-1 dark:text-gray-400">{{ currentUser.email }}</div>
+    </div>
+  </div>
+  <mat-divider/>
+  <a mat-menu-item>
+    <mat-icon>tune</mat-icon>
+    <span>Settings</span>
+  </a>
+  <a mat-menu-item routerLink="/logout">
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </a>
+</mat-menu>

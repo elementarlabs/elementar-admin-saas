@@ -1,0 +1,24 @@
+<emr-layout layoutId="root" windowMode>
+  <emr-layout-sidebar>
+    <app-sidebar/>
+  </emr-layout-sidebar>
+  <emr-layout-body class="block">
+    <emr-panel>
+      <emr-panel-header class="h-14">
+        <app-header/>
+      </emr-panel-header>
+      <emr-panel-body class="px-4 pb-4">
+        <emr-panel class="shadow-xs border border-surface-container rounded-3xl bg-surface-container-lowest">
+          <emr-panel-header class="h-14 border-b border-b-surface-container">
+            <div class="h-full flex items-center px-6">
+              <h1 class="font-medium text-lg">Home</h1>
+            </div>
+          </emr-panel-header>
+          <emr-panel-body>
+            <router-outlet/>
+          </emr-panel-body>
+        </emr-panel>
+      </emr-panel-body>
+    </emr-panel>
+  </emr-layout-body>
+</emr-layout>

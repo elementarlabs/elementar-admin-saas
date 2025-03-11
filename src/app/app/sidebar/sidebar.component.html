@@ -1,0 +1,26 @@
+<emr-sidebar>
+  <emr-sidebar-header>
+    <div class="flex items-center justify-between h-18 gap-3 ps-7 pe-2">
+      <a routerLink="/" class="font-3xl font-extrabold text-primary">ELEMENTAR</a>
+      <div class="flex items-center gap-3">
+        <button mat-icon-button (click)="toggleSidebar()">
+          <emr-icon name="ph:list"/>
+        </button>
+      </div>
+    </div>
+  </emr-sidebar-header>
+  <emr-sidebar-body>
+    <emr-sidebar-nav [activeKey]="activeKey" [navItems]="navItems">
+      <ng-template emrSidebarNavItemIcon let-name>
+        <emr-icon [name]="name"/>
+      </ng-template>
+    </emr-sidebar-nav>
+  </emr-sidebar-body>
+  <emr-sidebar-footer>
+    <emr-sidebar-nav [activeKey]="activeKey" [navItems]="footerNavItems">
+      <ng-template emrSidebarNavItemIcon let-name>
+        <emr-icon [name]="name"/>
+      </ng-template>
+    </emr-sidebar-nav>
+  </emr-sidebar-footer>
+</emr-sidebar>
