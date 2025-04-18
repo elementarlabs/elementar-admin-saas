@@ -1,26 +1,53 @@
 <emr-sidebar>
-  <emr-sidebar-header>
-    <div class="flex items-center justify-between h-18 gap-3 ps-7 pe-2">
-      <a routerLink="/" class="font-3xl font-extrabold text-primary">ELEMENTAR</a>
-      <div class="flex items-center gap-3">
-        <button mat-icon-button (click)="toggleSidebar()">
-          <emr-icon name="ph:list"/>
-        </button>
-      </div>
-    </div>
+  <emr-sidebar-header class="h-18">
+    <a routerLink="/" class="font-3xl font-extrabold text-primary">ELEMENTAR</a>
+    <button mat-icon-button (click)="toggleSidebar()">
+      <emr-icon name="ph:list"/>
+    </button>
   </emr-sidebar-header>
   <emr-sidebar-body>
-    <emr-sidebar-nav [activeKey]="activeKey" [navItems]="navItems">
-      <ng-template emrSidebarNavItemIcon let-name>
-        <emr-icon [name]="name"/>
-      </ng-template>
+    <emr-sidebar-nav [activeKey]="activeKey">
+      @for (navItem of navItems; track navItem) {
+        @switch (navItem.type) {
+          @case ('link') {
+            <a emr-sidebar-nav-item [routerLink]="navItem.link" [key]="navItem.key">
+              <ng-container emrSidebarNavItemIcon>
+                @if (navItem.icon) {
+                  <emr-icon [name]="navItem.icon"/>
+                }
+              </ng-container>
+              {{ navItem.name }}
+            </a>
+          }
+          @case ('divider') {
+            <emr-sidebar-nav-divider/>
+          }
+          @default {
+            <emr-sidebar-nav-item>
+              <ng-container emrSidebarNavItemIcon>
+                @if (navItem.icon) {
+                  <emr-icon [name]="navItem.icon"/>
+                }
+              </ng-container>
+              {{ navItem.name }}
+            </emr-sidebar-nav-item>
+          }
+        }
+      }
     </emr-sidebar-nav>
   </emr-sidebar-body>
   <emr-sidebar-footer>
-    <emr-sidebar-nav [activeKey]="activeKey" [navItems]="footerNavItems">
-      <ng-template emrSidebarNavItemIcon let-name>
-        <emr-icon [name]="name"/>
-      </ng-template>
+    <emr-sidebar-nav [activeKey]="activeKey">
+      @for (navItem of footerNavItems; track navItem) {
+        <a emr-sidebar-nav-item [routerLink]="navItem.link" [key]="navItem.key">
+          <ng-container emrSidebarNavItemIcon>
+            @if (navItem.icon) {
+              <emr-icon [name]="navItem.icon"/>
+            }
+          </ng-container>
+          {{ navItem.name }}
+        </a>
+      }
     </emr-sidebar-nav>
   </emr-sidebar-footer>
 </emr-sidebar>

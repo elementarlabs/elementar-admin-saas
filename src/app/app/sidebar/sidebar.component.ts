@@ -5,12 +5,15 @@ import { Location } from '@angular/common';
 import {
   SidebarBodyComponent,
   SidebarComponent as EmrSidebarComponent,
-  SidebarFooterComponent, SidebarHeaderComponent, SidebarNavComponent, SidebarNavItemIconDirective
+  SidebarFooterComponent,
+  SidebarHeaderComponent,
+  SidebarNavComponent, SidebarNavDividerComponent,
+  SidebarNavItemComponent,
+  SidebarNavItemIconDirective
 } from '@elementar-ui/components/sidebar';
 import { MatIconButton } from '@angular/material/button';
 import { IconComponent } from '@elementar-ui/components/icon';
 import { LayoutApiService } from '@elementar-ui/components/layout';
-import { NavigationItem } from '@elementar-ui/components/navigation';
 
 @Component({
   selector: 'app-sidebar',
@@ -23,7 +26,9 @@ import { NavigationItem } from '@elementar-ui/components/navigation';
     SidebarNavComponent,
     SidebarNavItemIconDirective,
     MatIconButton,
-    IconComponent
+    IconComponent,
+    SidebarNavItemComponent,
+    SidebarNavDividerComponent
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
@@ -36,11 +41,10 @@ export class SidebarComponent implements OnInit {
   router = inject(Router);
   location = inject(Location);
   height: string | null = '200px';
-  compact = false;
 
   readonly navigation = viewChild.required<any>('navigation');
 
-  navItems: NavigationItem[] = [
+  navItems: any[] = [
     {
       key: 'home',
       type: 'link',
@@ -73,8 +77,8 @@ export class SidebarComponent implements OnInit {
       name: 'Item menu 4',
     },
   ];
-  navItemLinks: NavigationItem[] = [];
-  footerNavItems: NavigationItem[] = [
+  navItemLinks: any[] = [];
+  footerNavItems: any[] = [
     {
       key: 'help',
       type: 'link',
@@ -97,7 +101,7 @@ export class SidebarComponent implements OnInit {
       this.navItemLinks.push(navItem);
 
       if (navItem.children) {
-        this.navItemLinks = this.navItemLinks.concat(navItem.children as NavigationItem[]);
+        this.navItemLinks = this.navItemLinks.concat(navItem.children as any[]);
       }
     });
     this._activateLink();
