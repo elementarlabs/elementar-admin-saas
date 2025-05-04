@@ -12,8 +12,9 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { PageTitleStrategyService } from '@elementar-ui/components/core';
+import { ENVIRONMENT, EnvironmentService, GlobalStore, PageTitleStrategyService } from '@elementar-ui/components/core';
 import { AppStore } from './state/app.store';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,9 +33,19 @@ export const appConfig: ApplicationConfig = {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' }
     },
+    {
+      provide: ENVIRONMENT,
+      useValue: environment
+    },
+    {
+      provide: TitleStrategy,
+      useClass: PageTitleStrategyService
+    },
     provideAppInitializer(() => {
-      const appStore = inject(AppStore);
+      const envService = inject(EnvironmentService);
+      const globalStore = inject(GlobalStore);
       return new Promise((resolve, reject) => {
+        globalStore.setPageTitle(envService.getValue('pageTitle'));
         resolve(true);
       });
     }),
