@@ -1,37 +1,29 @@
-import { afterNextRender, Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { afterNextRender, Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
-import { PageLoadingBarComponent } from '@elementar-ui/components/page-loading-bar';
-import { ScreenLoaderComponent } from './app/screen-loader/screen-loader.component';
 import {
-  AnalyticsService, EnvironmentService,
+  AnalyticsService,
   InactivityTrackerService,
-  ScreenLoaderService, SeoService,
   ThemeManagerService
 } from '@elementar-ui/components/core';
+import { TextLogoComponent } from '@elementar-ui/components/logo';
+import { SplashScreenComponent } from '@elementar-ui/components/splash-screen';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    ScreenLoaderComponent,
-    PageLoadingBarComponent
+    TextLogoComponent,
+    SplashScreenComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   private _themeManager = inject(ThemeManagerService);
-  private _screenLoader = inject(ScreenLoaderService);
   private _analyticsService = inject(AnalyticsService);
   private _inactivityTracker = inject(InactivityTrackerService);
-  private _seoService = inject(SeoService);
-  private _envService = inject(EnvironmentService);
-  private _platformId = inject(PLATFORM_ID);
   private _router = inject(Router);
-
-  loadingText = signal('Loading application...');
-  pageLoaded = signal(false);
 
   constructor() {
     afterNextRender(() => {
@@ -45,10 +37,6 @@ export class AppComponent implements OnInit {
             top: 0,
             left: 0
           });
-          setTimeout(() => {
-            this._screenLoader.hide();
-            this.pageLoaded.set(true);
-          }, 1000);
         })
       ;
 

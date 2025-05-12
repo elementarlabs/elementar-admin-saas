@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from '../app/header/header.component';
-import { SidebarComponent } from '../app/sidebar/sidebar.component';
+import { HeaderComponent } from '@/app/header/header.component';
+import { SidebarComponent } from '@/app/sidebar/sidebar.component';
 import { LayoutBodyComponent, LayoutComponent, LayoutSidebarComponent } from '@elementar-ui/components/layout';
 import { PanelBodyComponent, PanelComponent, PanelHeaderComponent } from '@elementar-ui/components/panel';
 

@@ -14,6 +14,7 @@ import {
 import { MatIconButton } from '@angular/material/button';
 import { IconComponent } from '@elementar-ui/components/icon';
 import { LayoutApiService } from '@elementar-ui/components/layout';
+import { LogoComponent } from '@elementar-ui/components/logo';
 
 @Component({
   selector: 'app-sidebar',
@@ -28,7 +29,8 @@ import { LayoutApiService } from '@elementar-ui/components/layout';
     MatIconButton,
     IconComponent,
     SidebarNavItemComponent,
-    SidebarNavDividerComponent
+    SidebarNavDividerComponent,
+    LogoComponent
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
