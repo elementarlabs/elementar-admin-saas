@@ -7,17 +7,32 @@
       <emr-panel-header class="h-14">
         <app-header/>
       </emr-panel-header>
-      <emr-panel-body class="px-4 pb-4">
-        <emr-panel class="shadow-xs border border-surface-container rounded-3xl bg-surface-container-lowest">
-          <emr-panel-header class="h-14 border-b border-b-surface-container">
-            <div class="h-full flex items-center px-6">
-              <h1 class="font-medium text-lg">Home</h1>
-            </div>
-          </emr-panel-header>
-          <emr-panel-body>
-            <router-outlet/>
-          </emr-panel-body>
-        </emr-panel>
+      <emr-panel-body>
+        <div class="flex h-full ps-4 pb-4">
+          <emr-panel class="shadow-xs grow border border-surface-container rounded-3xl bg-surface-container-lowest"
+                     [class.me-4]="sidePanel.isOpen()">
+            <emr-panel-header class="h-14 border-b border-b-surface-container">
+              <div class="h-full flex items-center px-6">
+                <h1 class="font-medium text-lg">Home</h1>
+              </div>
+            </emr-panel-header>
+            <emr-panel-body class="px-4 pb-4">
+              <router-outlet/>
+            </emr-panel-body>
+          </emr-panel>
+          <emr-side-panel #sidePanel>
+            <emr-side-panel-tab tabId="info" label="Info" icon="info">
+              <div class="p-5">
+                <p>This is the contents of the first tab.</p>
+              </div>
+            </emr-side-panel-tab>
+            <emr-side-panel-tab tabId="list" label="List" icon="list">
+              <div class="p-5">
+                <p>This is the contents of the second tab.</p>
+              </div>
+            </emr-side-panel-tab>
+          </emr-side-panel>
+        </div>
       </emr-panel-body>
     </emr-panel>
   </emr-layout-body>

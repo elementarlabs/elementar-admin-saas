@@ -1,17 +1,5 @@
-@use '@angular/material' as mat;
 @use '@elementar-ui/components/styles/themes/default';
 
 @theme {
   --color-border: var(--color-surface-container-highest);
-}
-
-:root {
-  @include mat.button-overrides(
-    (
-      filled-container-shape: 10px,
-      outlined-container-shape: 10px,
-      protected-container-shape: 10px,
-      text-container-shape: 10px,
-    )
-  );
 }
