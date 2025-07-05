@@ -43,7 +43,9 @@
       }
     </button>
     <emr-dicebear [key]="currentUser.email"
-                  [src]="currentUser.photoURL || ''" [clickable]="true" [matMenuTriggerFor]="accountMenu"
+                  [image]="currentUser.photoURL || ''"
+                  [clickable]="true"
+                  [matMenuTriggerFor]="accountMenu"
                   matTooltip="Account" class="size-8"/>
   </div>
 </div>
