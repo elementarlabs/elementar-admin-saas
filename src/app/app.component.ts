@@ -1,10 +1,9 @@
-import { afterNextRender, Component, inject, OnInit } from '@angular/core';
+import { afterNextRender, Component, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import {
   AnalyticsService,
   InactivityTrackerService,
-  ThemeManagerService
 } from '@elementar-ui/components/core';
 import { TextLogoComponent } from '@elementar-ui/components/logo';
 import { SplashScreenComponent } from '@elementar-ui/components/splash-screen';
@@ -19,8 +18,7 @@ import { SplashScreenComponent } from '@elementar-ui/components/splash-screen';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-  private _themeManager = inject(ThemeManagerService);
+export class AppComponent {
   private _analyticsService = inject(AnalyticsService);
   private _inactivityTracker = inject(InactivityTrackerService);
   private _router = inject(Router);
@@ -48,9 +46,5 @@ export class AppComponent implements OnInit {
         })
       ;
     });
-  }
-
-  ngOnInit(): void {
-    this._themeManager.setColorScheme(this._themeManager.getPreferredColorScheme());
   }
 }

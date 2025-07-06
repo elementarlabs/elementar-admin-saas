@@ -34,14 +34,10 @@
         <emr-icon name="ph:bell"/>
       </span>
     </button>
-    <button mat-icon-button (click)="_themeManager.toggleColorScheme()" matTooltip="Color Theme"
-            emrSoundEffect soundSrc="/assets/sound-effects/mouse-click.ogg">
-      @if (_themeManager.getColorScheme() === 'light') {
-        <emr-icon name="ph:sun"/>
-      } @else if (_themeManager.getColorScheme() === 'dark') {
-        <emr-icon name="ph:moon"/>
-      }
-    </button>
+    <emr-color-scheme-switcher matTooltip="Color Theme" emrSoundEffect>
+      <mat-icon *emrColorSchemeLight>light_mode</mat-icon>
+      <mat-icon *emrColorSchemeDark>dark_mode</mat-icon>
+    </emr-color-scheme-switcher>
     <emr-dicebear [key]="currentUser.email"
                   [image]="currentUser.photoURL || ''"
                   [clickable]="true"

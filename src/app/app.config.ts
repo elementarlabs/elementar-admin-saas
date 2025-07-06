@@ -1,5 +1,5 @@
 import {
-  ApplicationConfig, inject,
+  ApplicationConfig, inject, PLATFORM_ID,
   provideAppInitializer,
   provideZoneChangeDetection
 } from '@angular/core';
@@ -13,11 +13,13 @@ import { provideStore } from '@ngrx/store';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { ENVIRONMENT, EnvironmentService, GlobalStore, PageTitleStrategyService } from '@elementar-ui/components/core';
-import { AppStore } from './state/app.store';
 import { environment } from '../environments/environment';
+import { COLOR_SCHEME_LOCAL_KEY, ColorScheme, ColorSchemeStore } from '@elementar-ui/components/color-scheme';
+import { isPlatformBrowser } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    ColorSchemeStore,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withViewTransitions()),
     provideClientHydration(withEventReplay()),
@@ -44,7 +46,17 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       const envService = inject(EnvironmentService);
       const globalStore = inject(GlobalStore);
+      const platformId = inject(PLATFORM_ID);
+      const colorSchemeStore = inject(ColorSchemeStore);
       return new Promise((resolve, reject) => {
+        if (isPlatformBrowser(platformId)) {
+          const localColorScheme = localStorage
+            ? (localStorage.getItem(COLOR_SCHEME_LOCAL_KEY) as ColorScheme || 'light')
+            : 'light';
+          // but the best solution set it from backend
+          colorSchemeStore.setScheme(localColorScheme);
+        }
+
         globalStore.setPageTitle(envService.getValue('pageTitle'));
         resolve(true);
       });

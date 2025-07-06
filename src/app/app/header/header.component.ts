@@ -12,13 +12,17 @@ import { PopoverTriggerForDirective } from '@elementar-ui/components/popover';
 import { SoundEffectDirective } from '@elementar-ui/components/core';
 import {
   BreadcrumbItemComponent,
-  BreadcrumbItemIconDirective, BreadcrumbsComponent,
+  BreadcrumbItemIconDirective,
+  BreadcrumbsComponent,
   BreadcrumbSeparatorComponent
 } from '@elementar-ui/components/breadcrumbs';
 import { IconComponent } from '@elementar-ui/components/icon';
-import { ThemeManagerService } from '@elementar-ui/components/core';
 import { LayoutApiService } from '@elementar-ui/components/layout';
-import { Notification } from '@elementar-ui/components/notifications';
+import {
+  ColorSchemeDarkDirective,
+  ColorSchemeLightDirective,
+  ColorSchemeSwitcherComponent
+} from '@elementar-ui/components/color-scheme';
 
 @Component({
   selector: 'app-header',
@@ -41,7 +45,10 @@ import { Notification } from '@elementar-ui/components/notifications';
     BreadcrumbSeparatorComponent,
     BreadcrumbsComponent,
     IconComponent,
-    RouterLink
+    RouterLink,
+    ColorSchemeDarkDirective,
+    ColorSchemeLightDirective,
+    ColorSchemeSwitcherComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -50,7 +57,6 @@ import { Notification } from '@elementar-ui/components/notifications';
   }
 })
 export class HeaderComponent implements OnInit {
-  protected _themeManager = inject(ThemeManagerService);
   protected _layoutApi = inject<any>(LayoutApiService);
 
   get currentUser(): any {
@@ -60,47 +66,6 @@ export class HeaderComponent implements OnInit {
       photoURL: ''
     };
   }
-
-  notifications: Notification[] = [
-    {
-      actor: {
-        id: 1,
-        name: 'Justin Hansen',
-        username: 'justin.hansen',
-        avatarUrl: 'assets/avatars/1.svg'
-      },
-      notifier: {
-        id: 2,
-        name: 'Elma Johnson',
-        username: 'elma.johnson',
-        avatarUrl: 'assets/avatars/2.svg'
-      },
-      payload: {
-        content: 'what did you say?'
-      },
-      type: 'mentionedInComment',
-      createdAt: '1 hour ago'
-    },
-    {
-      actor: {
-        id: 3,
-        name: 'Johnny Gladden',
-        username: 'johnny.gladden',
-        avatarUrl: 'assets/avatars/3.svg'
-      },
-      notifier: {
-        id: 4,
-        name: 'Angela Naylor',
-        username: 'angela.naylor',
-        avatarUrl: 'assets/avatars/4.svg'
-      },
-      payload: {
-        folderName: 'My New Project'
-      },
-      type: 'inviteToEditFilesInFolder',
-      createdAt: '2 hours ago'
-    }
-  ];
 
   ngOnInit() {
   }
